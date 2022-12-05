@@ -16,5 +16,3 @@ def find_any_overlap(sections):
             overlaps += 1 
 
     print(overlaps)
-
-find_any_overlap("4input.txt")
