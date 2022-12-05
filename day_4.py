@@ -17,3 +17,4 @@ def find_overlapping_sections(sections):
 
     print(fully_contained_pairs)
 
+find_overlapping_sections("4input.txt")
