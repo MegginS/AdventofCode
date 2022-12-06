@@ -13,7 +13,7 @@ def create_stacks(crates):
         j = 1
         if row[i].isdigit():
             return stacks
-            
+
         total_crates = (len(info[0]) + 1)/4
 
         while i <= total_crates:
@@ -22,8 +22,6 @@ def create_stacks(crates):
                 stacks[i][0:0] = row[j]
             i += 1
             j += 4
-
-    return stacks
 
 elf_stacks = create_stacks("5input.txt")
 
