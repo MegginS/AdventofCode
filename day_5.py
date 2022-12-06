@@ -8,13 +8,12 @@ def create_stacks(crates):
 
     stacks = {}
 
-    total_crates = (len(info[0]) + 1)/4
-
     for row in info:
         i = 1
         j = 1
         if row[i].isdigit():
             return stacks
+            
         total_crates = (len(info[0]) + 1)/4
 
         while i <= total_crates:
