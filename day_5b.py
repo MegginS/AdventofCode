@@ -1,33 +1,48 @@
 import re
 
-stacks = {
-    "1" : ["C", "Z", "N", "B", "M", "W", "Q", "V"],
-    "2" : ["H", "Z", "R", "W", "C", "B"],
-    "3" : ["F", "Q", "R", "J"],
-    "4" : ["Z", "S", "W", "H", "F", "N", "M", "T"],
-    "5" : ["G", "F", "W", "L", "N", "Q", "P"],
-    "6" : ["L", "P", "W"],
-    "7" : ["V", "B", "D", "R", "G", "C", "Q", "J"],
-    "8" : ["Z", "Q", "N", "B", "W"],
-    "9" : ["H", "L", "F", "C", "G", "T", "J"]
-}
+
+def create_stacks(crates):
+
+    with open(crates) as f:
+        info = f.read().splitlines()
+
+    stacks = {}
+
+    for row in info:
+        i = 1
+        j = 1
+        if row[i].isdigit():
+            return stacks
+
+        total_crates = (len(info[0]) + 1)/4
+
+        while i <= total_crates:
+            stacks[i] = stacks.get(i, [])
+            if row[j] != " ":
+                stacks[i][0:0] = row[j]
+            i += 1
+            j += 4
+
+elf_stacks = create_stacks("5input.txt")
+
 
 def rearranging_crates(instructions):
 
     data = open(instructions)
 
     for line in data:
-        info = line[5:].replace(" ", "").rstrip()
-        num_moves, origin, destination  = re.split("from|to", info)
-        making_moves(num_moves, origin, destination)
+        if line.startswith("move"):
+            info = line[5:].replace(" ", "").rstrip()
+            num_moves, origin, destination  = re.split("from|to", info)
+            making_moves(num_moves, origin, destination)
 
 
 def making_moves(num_moves, origin, destination):
 
-    slice_moving = stacks.get(origin)[-int(num_moves):]
+    slice_moving = elf_stacks.get(int(origin))[-int(num_moves):]
 
-    stacks[destination].extend(slice_moving)
-    stacks[origin] = stacks.get(origin)[:-int(num_moves)]
+    elf_stacks[int(destination)].extend(slice_moving)
+    elf_stacks[int(origin)] = elf_stacks.get(int(origin))[:-int(num_moves)]
 
 
 def getting_top_crates():
@@ -36,8 +51,10 @@ def getting_top_crates():
 
     top_stacks = ""
     stack = 1
-    while stack <= len(stacks):
-        top_stacks = top_stacks + stacks.get(str(stack))[-1]
+    while stack <= len(elf_stacks):
+        top_stacks = top_stacks + elf_stacks.get(stack)[-1]
         stack += 1
 
     print(top_stacks)
+
+getting_top_crates()
