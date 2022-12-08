@@ -43,15 +43,21 @@ def create_directory_tree(files):
     
     to_visit = [root]
     overall_size = 0
+    delete_for_space = 30000000
+    remaining_space = 70000000 - int(root.size)
+    space_needed = 30000000 - remaining_space
 
     while to_visit:
         current = to_visit.pop()
         size = current.size
 
-        if (int(size)) < 100000 and current.children != []:
+        if int(size) < 100000 and current.children != []:
             overall_size += int(size)
+        if int(size) > space_needed and int(size) < delete_for_space:
+            delete_for_space = size
         to_visit.extend(current.children)
-        
+  
     print(f'total = {overall_size}')
+    print(f'delete {delete_for_space}')
 
 create_directory_tree("inputs/7input.txt")
