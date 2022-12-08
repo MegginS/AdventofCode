@@ -1,20 +1,17 @@
 class Node:
-
+    """Node of a Tree"""
     def __init__(self, name, parent, size=0, children=None):
         self.name = name
         self.size = size
         self.parent = parent
         self.children = children or []
 
-    def __repr__(self):
-        return f" <Node= {self.name}, size = {self.size}, children = {self.children}, parent = {self.parent}>"
-
 
 def create_directory_tree(files):
+    """Creates a filesystem tree"""
 
     info = open(files)
-    root = Node("/", parent=None)
-    parent = root
+    root = parent = Node("/", parent=None)
 
     for line in info:
         line = line.rstrip()
@@ -40,12 +37,20 @@ def create_directory_tree(files):
             while temp.parent:
                 temp.parent.size += int(node.size)
                 temp = temp.parent
-    
+
+    return root
+
+
+def find_requested_info(files):
+    """finds combined space of directories under 100000 & finds 
+    smallest directory that if removed, will leave 30000000"""
+
+    root = create_directory_tree(files)
+
     to_visit = [root]
     overall_size = 0
-    delete_for_space = 30000000
-    remaining_space = 70000000 - int(root.size)
-    space_needed = 30000000 - remaining_space
+    delete_for_space = int(root.size)
+    space_needed = 30000000 - (70000000 - int(root.size))
 
     while to_visit:
         current = to_visit.pop()
@@ -60,4 +65,5 @@ def create_directory_tree(files):
     print(f'total = {overall_size}')
     print(f'delete =  {delete_for_space}')
 
-create_directory_tree("inputs/7input.txt")
+
+find_requested_info("inputs/7input.txt")
