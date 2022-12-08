@@ -58,6 +58,6 @@ def create_directory_tree(files):
         to_visit.extend(current.children)
   
     print(f'total = {overall_size}')
-    print(f'delete {delete_for_space}')
+    print(f'delete =  {delete_for_space}')
 
 create_directory_tree("inputs/7input.txt")
