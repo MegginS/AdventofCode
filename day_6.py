@@ -1,7 +1,6 @@
 with open("inputs/6input.txt") as f:
     info = f.readlines()
 
-
 def find_unique(quantity):
     """finds unique characters and gets index of last character"""
 
@@ -16,7 +15,6 @@ def find_unique(quantity):
 
 end_unique_4 = find_unique(4)
 end_unique_14 = find_unique(14)
-
 
 
 # def find_unique_four_recursively(i=0):
