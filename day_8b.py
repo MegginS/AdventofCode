@@ -74,9 +74,7 @@ def seeing_most_trees():
             base = current
         else:
             current = current.right
-        if current.right is None and current.down is None:
-            break
 
-    print(most_tree_views)
+    return most_tree_views
     
-seeing_most_trees()
+print(seeing_most_trees())
