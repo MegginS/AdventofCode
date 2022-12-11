@@ -1,5 +1,5 @@
 class Node:
-    """Node of a Tree"""
+ 
     def __init__(self, height, left = None, up = None, down = None, right= None):
         self.height = height
         self.left = left
@@ -13,18 +13,15 @@ with open("inputs/8input.txt") as f:
     root = Node(trees[0][0])
 
 
-def layout_tree_farm(row_above = False, left = root):
+def layout_tree_farm():
 
-    new_row = False
-    first_column_up = root
+    new_row = row_above = False
+    col_1_node_above = left = root
 
     for tree in trees[1:]:
         if new_row:
-            up = first_column_up
-            current = Node(tree, up = up)
-            current.up.down = current
-            left = current
-            first_column_up = current
+            current = Node(tree, up = col_1_node_above)
+            current.up.down = left = col_1_node_above = current
             row_above = True
             new_row = False
         elif tree == "\n":
@@ -32,14 +29,11 @@ def layout_tree_farm(row_above = False, left = root):
         elif row_above:
             current = Node(tree, left)
             current.up = current.left.up.right
-            current.left.right = current
-            current.left.up.right.down = current
-            left = current
+            current.left.right = current.left.up.right.down = left = current
             new_row = False
         else:
             current = Node(tree, left)
-            current.left.right = current
-            left = current
+            current.left.right = left = current
             new_row = False
 
     return root
@@ -65,7 +59,7 @@ def calculating_points(current):
 
 
 def seeing_most_trees():
-
+ 
     root = layout_tree_farm()
     base = current = root
     most_tree_views = 0
