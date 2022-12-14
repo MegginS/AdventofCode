@@ -10,7 +10,7 @@ for instruction in instructions:
         x += int(instruction)
     i+=1
 
-    if i % cycle == 0 and i != 0.0:
+    if i % cycle == 0:
         totals.append(i*x)
         cycle += 40
 
