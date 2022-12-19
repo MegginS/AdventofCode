@@ -5,6 +5,7 @@ totals = []
 signal_strength =0
 cycle = 20
 
+
 for instruction in instructions:
     if instruction != "addx" and instruction != "noop":
         x += int(instruction)
@@ -18,3 +19,6 @@ for total in totals:
     signal_strength += total
 
 print(signal_strength)
+
+
+# 14780 
