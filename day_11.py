@@ -2,7 +2,7 @@ import math
 
 def starting_items():
     monkeys = []
-    with open("inputs/12input.txt") as f:
+    with open("inputs/11input.txt") as f:
         info = f.read().splitlines()
         for line in info:
             line = line.strip().rstrip(":") 
@@ -20,7 +20,7 @@ activity = {0:0, 1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0}
 
 def moving_items(monkeys, turns):
 
-    with open("inputs/12input.txt") as f:
+    with open("inputs/11input.txt") as f:
         info = f.read().splitlines()
         item_moving = []
 
@@ -37,10 +37,10 @@ def moving_items(monkeys, turns):
                     if operation[1] == "old":
                         operation[1] = holding_item
                     if operation[0] == "*":
-                        holding_item = math.floor((int(holding_item) * int(operation[1])) /3)
+                        holding_item = math.floor((int(holding_item) * int(operation[1])) / 3)
                         monkeys[i][j] = holding_item
                     if operation[0] == "+":
-                        holding_item = math.floor((int(holding_item) + int(operation[1])) /3)
+                        holding_item = math.floor((int(holding_item) + int(operation[1])) / 3)
                         monkeys[i][j] = holding_item
 
             if line.startswith("T"):
